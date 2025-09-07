@@ -1,7 +1,7 @@
 import socket
 
 HOST = "127.0.0.1"
-PORT = 8081
+PORT = 65432
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -10,20 +10,27 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
     print(f"[server] listening on {HOST}:{PORT}")
 
     while True:  # keep accepting new clients
+        print("[server] waiting for a new connection...")
         conn, addr = server.accept()
         print(f"[server] connected by {addr}")
         with conn:
             while True:
+                print("[server] waiting to receive data...")
                 data = conn.recv(1024)
                 if not data:      # client closed connection
+                    print("[server] no data received, closing connection.")
                     break
                 print(f"[server] received raw data: {data}")
                 length_str = data[:3].decode()
                 L = int(length_str)
-                print(f"[server] length of data: {L}")
+                print(f"[server] extracted length: {L}")
                 message = data[3:3+L].decode()
+                print(f"[server] extracted message: '{message}'")
+                print(f"[server] message length: {len(message)}")
                 if message.strip().lower() == "hello":
+                    print("[server] received 'hello', sending greeting.")
                     conn.sendall(b"Greetings from server!\n")
                 else:
+                    print(f"[server] echoing back message: '{message}'")
                     conn.sendall(message.encode())  # echo back
         print(f"[server] disconnected {addr}")
