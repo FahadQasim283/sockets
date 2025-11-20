@@ -29,11 +29,3 @@ def start_client(host='localhost', port=12345):
 
 if __name__ == "__main__":
     start_client()
-
-# Explanation:
-# This client program demonstrates sending messages with length prefixing.
-# - Compute length: Gets the byte length of the message after encoding to UTF-8.
-# - Pad with leading zeros: Uses zfill(3) to ensure the length is exactly 3 digits (assuming max 255 bytes).
-# - Prepend length: Adds the 3-digit length string at the beginning of the message.
-# - Send: Transmits the full message (length + content) to the server.
-# - Receive response: Waits for and prints the server's acknowledgment.

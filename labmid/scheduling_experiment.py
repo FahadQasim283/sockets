@@ -89,14 +89,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# Explanation of the question:
-# The question asks to write a program and experiment with different scheduling options (static, dynamic, guided) by changing the schedule clause in the code.
-# Scheduling in parallel computing determines how work is distributed among threads/processes.
-# - Static scheduling: Work is divided into chunks and assigned to threads at the beginning. Good for uniform work.
-# - Dynamic scheduling: Chunks are assigned to threads as they become available. Better for variable work times.
-# - Guided scheduling: Starts with large chunks that decrease in size, combining benefits of static and dynamic.
-# This program simulates these scheduling types using Python's ThreadPoolExecutor.
-# It computes the sum of squares for numbers 0 to n-1, divided into chunks.
-# Each scheduling type is run, and the output shows which worker processed which chunks, along with timing.
-# The program demonstrates how different schedules affect work distribution and performance.

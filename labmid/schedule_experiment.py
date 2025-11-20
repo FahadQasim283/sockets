@@ -180,25 +180,3 @@ if __name__ == "__main__":
     # Seed random so repeated runs are similar but still show variation
     random.seed(1)
     run_experiment(args.schedule, args.n, args.chunk, args.procs)
-
-
-# Explanation of the question and comments:
-# The task: "Write a program and experiment with different scheduling options (static, dynamic, guided) by
-# changing the schedule clause in the code. Observe how changing scheduling affects the order in which loop
-# iterations are executed."
-#
-# This script implements three scheduling strategies:
-# - static: iterations are partitioned into chunks and assigned to workers ahead of time (round-robin style).
-# - dynamic: fixed-size chunks are placed in a queue and workers pull the next available chunk when ready.
-# - guided: chunks start larger and shrink over time; workers pull chunks from a queue (approximates OpenMP guided).
-#
-# Each worker prints (via a shared manager list) which iterations it executed. The main process prints the
-# final sequence of execution so you can compare orders between schedules. We add random short sleeps to
-# simulate non-uniform work per iteration so dynamic/guided strategies show their load-balancing differences.
-#
-# Notes / edge cases:
-# - On Windows you must protect process creation with `if __name__ == "__main__"` (this file does that).
-# - Manager-backed lists preserve append order as each worker appends; that order is used to display execution
-#   order (approximate interleaving) but timing differences and process scheduling can slightly reorder events.
-# - For larger `n` and small `chunk` values you'll see more interleaving with dynamic/guided schedules.
-# - This script is intentionally simple and designed for observation and teaching, not for high-performance.

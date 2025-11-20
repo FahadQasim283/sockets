@@ -82,12 +82,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# Explanation of the question:
-# The question asks to write a program to observe the output with dynamic scheduling.
-# Dynamic scheduling in parallel computing means that work chunks are assigned to threads/processes as they become available,
-# rather than pre-assigning all chunks at the start. This can lead to better load balancing when work per chunk varies.
-# In this program, we simulate dynamic scheduling using a queue. Chunks are placed in a queue, and worker processes
-# take chunks from the queue as they finish their current work. Each chunk processes a range of numbers and computes their sum.
-# The output shows which process handled which chunk, demonstrating how dynamic scheduling distributes work.
-# We use random sleep times to simulate variable work per chunk, showing how dynamic scheduling adapts to this.

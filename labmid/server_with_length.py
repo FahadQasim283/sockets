@@ -37,12 +37,3 @@ def start_server(host='localhost', port=12345):
 
 if __name__ == "__main__":
     start_server()
-
-# Explanation:
-# This server program demonstrates receiving messages with length prefixing.
-# - Accept connection: Waits for client connections.
-# - Extract length: Reads the first 3 bytes and converts to integer (message length).
-# - Read message: Receives exactly the number of bytes specified by the length.
-# - Process message: Decodes and prints the received message.
-# - Send response: Acknowledges receipt back to the client.
-# This approach ensures proper handling of variable-length messages by using a fixed-size header for length information.
