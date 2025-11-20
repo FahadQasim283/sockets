@@ -1,0 +1,43 @@
+@startuml
+title Socket Programming Flowchart (Client-Server Model)
+
+start
+
+partition "Server" {
+    :Create socket();
+    :Bind socket to IP and port;
+    :Listen for connections;
+}
+
+partition "Client" {
+    :Create socket();
+    :Connect to server IP and port;
+}
+
+partition "Server" {
+    :Accept connection (creates new socket for client);
+}
+
+repeat
+    partition "Client" {
+        :Send data;
+        :Receive response;
+    }
+    partition "Server" {
+        :Receive data;
+        :Send response;
+    }
+repeat while (Data exchange ongoing?) is (yes)
+-> no;
+
+partition "Client" {
+    :Close socket;
+}
+
+partition "Server" {
+    :Close client socket;
+    :Close server socket;
+}
+
+stop
+@enduml
